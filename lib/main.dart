@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tiktok_clone/constants.dart';
+import 'package:tiktok_clone/views/Screens/auth/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,6 +11,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MaterialApp(
+      theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: bgColor),
+      home: LoginScreen(),
+    );
   }
 }
