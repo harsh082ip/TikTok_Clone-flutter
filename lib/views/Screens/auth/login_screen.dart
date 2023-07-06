@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tiktok_clone/constants.dart';
+import 'package:tiktok_clone/views/Screens/auth/signup_screen.dart';
 import 'package:tiktok_clone/views/Screens/widgets/glitch_effect.dart';
 import 'package:tiktok_clone/views/Screens/widgets/text_input_field.dart';
 
@@ -49,7 +51,9 @@ class LoginScreen extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: buttonColor,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(SignUp());
+                  },
                   child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 68.0),
                     child: Text(

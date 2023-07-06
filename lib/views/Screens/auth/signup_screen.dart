@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:tiktok_clone/controller/auth_controller.dart';
+import 'package:tiktok_clone/views/Screens/auth/login_screen.dart';
 
 import '../../../constants.dart';
 import '../widgets/glitch_effect.dart';
@@ -41,29 +45,34 @@ class SignUp extends StatelessWidget {
               ),
 
               // CircleAvatar for uploading Image
-              Stack(
-                children: [
-                  const CircleAvatar(
-                    radius: 65,
-                    backgroundImage: NetworkImage(
-                        'https://cdn-icons-png.flaticon.com/512/149/149071.png?w=826&t=st=1688515565~exp=1688516165~hmac=806fd8ab65f04dba05aecb328ff5f00844324baf66344301aee02ffef9207248'),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: Container(
-                      padding: const EdgeInsets.all(2.0),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(50.0)),
-                      child: const Icon(
-                        Icons.edit,
-                        size: 25.0,
-                        color: Colors.black,
+              InkWell(
+                onTap: () {
+                  Auth.instnace.pickImage();
+                },
+                child: Stack(
+                  children: [
+                    const CircleAvatar(
+                      radius: 65,
+                      backgroundImage: NetworkImage(
+                          'https://cdn-icons-png.flaticon.com/512/149/149071.png?w=826&t=st=1688515565~exp=1688516165~hmac=806fd8ab65f04dba05aecb328ff5f00844324baf66344301aee02ffef9207248'),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Container(
+                        padding: const EdgeInsets.all(2.0),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(50.0)),
+                        child: const Icon(
+                          Icons.edit,
+                          size: 25.0,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
 
               // const SizedBox
@@ -119,7 +128,13 @@ class SignUp extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: buttonColor,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Auth.instnace.SignUp(
+                        usernameController.text,
+                        emailController.text,
+                        passwordController.text,
+                        Auth.instnace.proImg);
+                  },
                   child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 68.0),
                     child: Text(
