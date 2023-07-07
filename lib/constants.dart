@@ -12,3 +12,11 @@ getRandomColor() => [
 const bgColor = Colors.black;
 const buttonColor = Colors.redAccent;
 const borderColor = Colors.grey;
+
+const pageIndex = [
+  'Home',
+  'Search',
+  'Add Video',
+  'Messages',
+  'Profile',
+];
