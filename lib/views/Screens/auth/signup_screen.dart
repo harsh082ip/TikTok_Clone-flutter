@@ -8,14 +8,15 @@ import '../../../constants.dart';
 import '../widgets/glitch_effect.dart';
 import '../widgets/text_input_field.dart';
 
-class SignUp extends StatelessWidget {
-  SignUp({super.key});
+class SignUpScreen extends StatelessWidget {
+  SignUpScreen({super.key});
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
   final TextEditingController usernameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,9 +107,11 @@ class SignUp extends StatelessWidget {
 
               // Confirm Password Input Field
               TextInputField(
-                  controller: confirmPasswordController,
-                  icon: Icons.lock,
-                  labelText: 'Confirm Password'),
+                controller: confirmPasswordController,
+                icon: Icons.lock,
+                labelText: 'Confirm Password',
+                isHide: true,
+              ),
 
               // const SizedBox
               const SizedBox(

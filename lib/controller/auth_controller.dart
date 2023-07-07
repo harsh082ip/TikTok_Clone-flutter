@@ -6,6 +6,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tiktok_clone/models/users.dart';
+import 'package:tiktok_clone/views/Screens/auth/login_screen.dart';
+import 'package:tiktok_clone/views/Screens/home_screen.dart';
 
 class Auth extends GetxController {
   File? proImg;
@@ -43,13 +45,48 @@ class Auth extends GetxController {
         await FirebaseFirestore.instance
             .collection('users')
             .doc(credential.user!.uid)
-            .set(user.toJson());
+            .set(user.toJson())
+            .then((value) {
+          Get.snackbar('User Registration Successful', 'Successfully SignedUp');
+        });
       } else {
         Get.snackbar('Incomplete details', 'User Credentials cannot be empty');
       }
     } catch (e) {
       // Getx Snackbar to displaying error message
       Get.snackbar('Error', e.toString());
+    }
+  }
+
+// for logging in the user
+  void login(String email, String password) async {
+    try {
+      if (email.isNotEmpty && password.isNotEmpty) {
+        await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: email, password: password);
+      } else {
+        Get.snackbar('Error', 'Enter all the details to proceed');
+      }
+    } catch (e) {
+      Get.snackbar('Error', 'Error logging In');
+    }
+  }
+
+  late Rx<User?> _user;
+
+  @override
+  void onReady() {
+    super.onReady();
+    _user = Rx<User?>(FirebaseAuth.instance.currentUser);
+    _user.bindStream(FirebaseAuth.instance.authStateChanges());
+    ever(_user, _setInitialView);
+  }
+
+  _setInitialView(User? user) {
+    if (user == null) {
+      Get.offAll(() => LoginScreen());
+    } else {
+      Get.offAll(() => HomeScreen());
     }
   }
 
