@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(pageIndex[pgIndex]),
+        child: pageIndex[pgIndex],
       ),
 
       // bottom navigation bar
