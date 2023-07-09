@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tiktok_clone/constants.dart';
+import 'package:tiktok_clone/views/Screens/add_caption_full_screen.dart';
 import 'package:tiktok_clone/views/Screens/widgets/text_input_field.dart';
 
 import 'package:video_player/video_player.dart';
@@ -31,7 +33,7 @@ class _AddCaptionScreenState extends State<AddCaptionScreen> {
     videoPlayerController.initialize();
     videoPlayerController.play();
     videoPlayerController.setLooping(true);
-    videoPlayerController.setVolume(0.0);
+    videoPlayerController.setVolume(0.7);
   }
 
   @override
@@ -40,9 +42,31 @@ class _AddCaptionScreenState extends State<AddCaptionScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 1.4,
-              child: VideoPlayer(videoPlayerController),
+            Stack(
+              children: [
+                Container(
+                  decoration:
+                      BoxDecoration(border: Border.all(color: Colors.white)),
+                  margin: EdgeInsets.symmetric(horizontal: 10.0)
+                      .copyWith(top: 10.0),
+                  height: MediaQuery.of(context).size.height / 1.4,
+                  child: VideoPlayer(videoPlayerController),
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 11,
+                  child: InkWell(
+                    onTap: () {
+                      Get.to(CaptionVideoFullScreen(
+                          videoPlayerController: videoPlayerController));
+                    },
+                    child: const Icon(
+                      Icons.fullscreen,
+                      size: 35.0,
+                    ),
+                  ),
+                ),
+              ],
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.022,
