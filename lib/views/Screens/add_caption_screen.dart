@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tiktok_clone/constants.dart';
+import 'package:tiktok_clone/controller/upload_video_controller.dart';
 import 'package:tiktok_clone/views/Screens/add_caption_full_screen.dart';
 import 'package:tiktok_clone/views/Screens/widgets/text_input_field.dart';
 
@@ -22,7 +23,8 @@ class _AddCaptionScreenState extends State<AddCaptionScreen> {
   late VideoPlayerController videoPlayerController;
   final TextEditingController musicNameController = TextEditingController();
   final TextEditingController captionController = TextEditingController();
-
+  VideoUploadController videoUploadController =
+      Get.put(VideoUploadController());
   @override
   void initState() {
     // TODO: implement initState
@@ -95,7 +97,10 @@ class _AddCaptionScreenState extends State<AddCaptionScreen> {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: buttonColor),
-              onPressed: () {},
+              onPressed: () {
+                videoUploadController.uploadVideo(musicNameController.text,
+                    captionController.text, widget.videoPath);
+              },
               child: const Text(
                 'Upload Video',
                 style: TextStyle(fontSize: 22.0),
